@@ -1,0 +1,142 @@
+.body {
+  font-family: 'Lato', sans-serif;
+  transition: .2s;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  flex-direction: column;
+  margin: 0 10px;
+}
+
+.title {
+  text-align: center;
+}
+
+.input {
+  width: 992px;
+  height: 100px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.wrap {
+  position: relative;
+  width: 1000px;
+  background-color: #e7e7e7;
+  overflow: hidden;
+  order: 2;
+}
+
+.row {
+  display: flex;
+}
+
+.keys {
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4px;
+  transition: .2s;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.backspace {
+  width: 120px;
+}
+
+.tab {
+  width: 90px;
+}
+
+.slash-key {
+  width: 60px;
+}
+
+.caps-lock {
+  width: 116px;
+}
+
+.enter {
+  position: relative;
+  width: 90px;
+  border-radius: 5px 5px 0 5px
+}
+
+.enter:before {
+  position: absolute;
+  content: '';
+  width: 52px;
+  height: 68px;
+  top: 100%;
+  right: 0%;
+  background-color: #fff;
+  border-radius: 0 0 5px 5px;
+}
+
+.shift-left {
+  width: 80px;
+}
+
+.shift-right {
+  width: 156px;
+}
+
+.cmd-left {
+  width: 80px;
+}
+
+.cmd-right {
+  width: 80px;
+}
+
+.space-key {
+  width: 332px;
+}
+
+.arrow-keys-wrap {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+}
+
+.arrow-keys {
+  width: 63px;
+  height: 28px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.up {
+  position: absolute;
+  top: 0%;
+  right: 33.4%;
+}
+
+.keys.active {
+  background-color: #333;
+  color: #fff;
+}
+
+.keys.remove {
+  animation: keys-animation 0.5s;
+}
+
+@keyframes keys-animation {
+  0% {
+    background-color: #333;
+    color: #fff;
+  }
+  100% {
+    background-color: #fff;
+    color: #333;
+  }
+}
