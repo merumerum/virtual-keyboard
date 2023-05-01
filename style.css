@@ -1,6 +1,7 @@
 .body {
   font-family: 'Lato', sans-serif;
   transition: .2s;
+  background: url(1.jpeg) center center/cover no-repeat;
 }
 
 .container {
@@ -14,6 +15,14 @@
 
 .title {
   text-align: center;
+  color: #003566;
+}
+
+.subtitle {
+  text-align: center;
+  color: #003566;
+  font-size: 16px;
+  font-weight: 100;
 }
 
 .input {
@@ -25,12 +34,13 @@
   border: 1px solid #ccc;
   resize: none;
   outline: none;
+  color: #003566;
 }
 
 .wrap {
   position: relative;
   width: 1000px;
-  background-color: #e7e7e7;
+  background:url(flowers.jpeg) center center/cover no-repeat;
   overflow: hidden;
   order: 2;
 }
@@ -42,7 +52,7 @@
 .keys {
   width: 60px;
   height: 60px;
-  background-color: #fff;
+  background-color: #f6fff8;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,7 +91,7 @@
   height: 68px;
   top: 100%;
   right: 0%;
-  background-color: #fff;
+  background-color: #f6fff8;
   border-radius: 0 0 5px 5px;
   transition: .2s;
   cursor: pointer;
@@ -117,7 +127,7 @@
 .arrow-keys {
   width: 63px;
   height: 28px;
-  background-color: #fff;
+  background-color: #f6fff8;
   border-radius: 4px;
 }
 
@@ -129,8 +139,8 @@
 
 .keys.active,
 .keys.active::before {
-  background-color: #333;
-  color: #fff;
+  background-color: #3a5a40;
+  color: #f6fff8;
 }
 
 .keys.remove,
@@ -145,11 +155,11 @@
 
 @keyframes keys-animation {
   0% {
-    background-color: #333;
-    color: #fff;
+    background-color: #3a5a40;
+    color: #f6fff8;
   }
   100% {
-    background-color: #fff;
+    background-color: #f6fff8;
     color: #333;
   }
 }

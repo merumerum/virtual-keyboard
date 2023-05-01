@@ -8,6 +8,7 @@ const mainContainer = document.createElement('div');
 const input = document.createElement('textarea');
 const keyboardWrap = document.createElement('div');
 const keyboardKeys = document.createElement('div');
+const subtitle = document.createElement('div');
 
 body.className = 'body';
 body.appendChild(header);
@@ -19,6 +20,7 @@ mainSection.appendChild(mainContainer);
 mainContainer.appendChild(input);
 mainContainer.appendChild(keyboardWrap);
 keyboardWrap.appendChild(keyboardKeys);
+footer.appendChild(subtitle);
 
 input.type = 'text';
 input.className = 'input';
@@ -28,6 +30,8 @@ h1.className = 'title';
 keyboardKeys.className = 'keyboard-keys';
 
 h1.innerText = 'RSS Virtual Keyboard by Meru';
+
+subtitle.innerHTML = '<h3 class="subtitle">Клавиатура создана в операционной системе macOS</h3><h3 class="subtitle">Для переключения языка комбинация: ctrl + option (левый)</>';
 
 const keyboardRows = [
   ['Del', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', ''],
@@ -62,6 +66,31 @@ const keyboardRowsRuUp = [
   'Shift', 'Ё', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', '?', 'Shift',
   'control', 'option', 'command', '', 'command', 'option', '', '', '', '',
 ];
+
+keyboardKeys.addEventListener('click', (event) => {
+  const cursorPosition = input.selectionStart;
+  const key = event.target;
+  const keyCode = key.getAttribute('id');
+  if (key.classList.contains('keys') && key.innerText.length === 1) {
+    input.value += key.innerText;
+  } else if (keyCode === 'Delete') {
+    input.value = input.value.slice(0, cursorPosition) + input.value.slice(cursorPosition + 1);
+    input.setSelectionRange(cursorPosition, cursorPosition);
+  } else if (keyCode === 'Backspace') {
+    input.value = input.value.slice(0, -1);
+    input.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
+  } else if (keyCode === 'Tab') {
+    event.preventDefault();
+    input.value += '\t';
+    input.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+  } else if (keyCode === 'Enter') {
+    input.value += '\n';
+    input.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+  } else if (keyCode === 'Space') {
+    input.value += ' ';
+    input.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+  }
+});
 
 function generateKeyboard(lang) {
   for (let i = 0; i < lang.length; i += 1) {
@@ -302,9 +331,7 @@ shiftLeft.addEventListener('mouseup', ShiftKeyUp);
 shiftRight.addEventListener('mousedown', ShiftKeyDown);
 shiftRight.addEventListener('mouseup', ShiftKeyUp);
 
-
 // Caps Lock
-
 let capsLockPressed = false;
 
 function CapsLockKeyDown(event) {
