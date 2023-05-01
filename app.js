@@ -31,24 +31,38 @@ h1.innerText = 'RSS Virtual Keyboard by Meru';
 
 const keyboardRows = [
   ['Del', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', ''],
-  ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', 'Enter'],
-  ['Caps lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'", '\\'],
-  ['Shift', '`', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'Shift'],
+  ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', '0', 'p', '[', ']', 'Enter'],
+  ['Caps lock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", '\\'],
+  ['Shift', '`', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'Shift'],
   ['control', 'option', 'command', '', 'command', 'option', '', '', '', ''],
 ];
 
-for (let i = 0; i < keyboardRows.length; i += 1) {
-  const row = document.createElement('div');
-  row.className = 'row';
+const keyboardRowsEn = keyboardRows.flat();
 
-  for (let j = 0; j < keyboardRows[i].length; j += 1) {
-    const key = document.createElement('div');
-    key.className = 'keys';
-    key.textContent = keyboardRows[i][j];
-    row.appendChild(key);
+const keyboardRowsRu = [
+  'Del', '!', '"', '№', '%', ':', ',', '.', ';', '(', ')', '_', '+', '',
+  'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'Enter',
+  'Caps lock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', "э", '\\',
+  'Shift', 'ё', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'Shift',
+  'control', 'option', 'command', '', 'command', 'option', '', '', '', '',
+];
+
+function generateKeyboard(lang) {
+  for (let i = 0; i < lang.length; i += 1) {
+    const row = document.createElement('div');
+    row.className = 'row';
+
+    for (let j = 0; j < lang[i].length; j += 1) {
+      const key = document.createElement('div');
+      key.className = 'keys';
+      key.textContent = lang[i][j];
+      row.appendChild(key);
+    }
+    keyboardKeys.appendChild(row);
   }
-  keyboardKeys.appendChild(row);
 }
+generateKeyboard(keyboardRows);
+
 
 const keys = document.querySelectorAll('.keys');
 
@@ -134,6 +148,8 @@ keys[61].innerHTML = '<i class="fa-solid fa-caret-up"></i>';
 keys[62].innerHTML = '<i class="fa-solid fa-caret-down"></i>';
 keys[63].innerHTML = '<i class="fa-solid fa-caret-right"></i>';
 
+
+
 // let jet = [];
 // document.onkeydown = function (e) {
 //   console.log(e);
@@ -179,3 +195,52 @@ document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
 document.addEventListener('mousedown', keyDown);
 document.addEventListener('mouseup', keyUp);
+
+
+// переключение языка
+let ctrlPressed = false;
+let altPressed = false;
+let currentLang = 'en';
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Control') {
+    ctrlPressed = true;
+  }
+  if (event.key === 'Alt') {
+    altPressed = true;
+  }
+
+  if (ctrlPressed && altPressed) {
+    switchLanguage();
+  }
+  console.log(currentLang);
+});
+
+document.addEventListener('keyup', (event) => {
+  if (event.key === 'Control') {
+    ctrlPressed = false;
+  }
+  if (event.key === 'Alt') {
+    altPressed = false;
+  }
+});
+
+function switchLanguage() {
+  if (currentLang === 'en') {
+    currentLang = 'ru';
+    for (let i = 13; i < keys.length; i += 1) {
+      if (keys[i].innerText !== keyboardRowsRu[i]) {
+        keys[i].innerText = keyboardRowsRu[i];
+      }
+    }
+  } else {
+    currentLang = 'en';
+    for (let i = 0; i < keys.length; i += 1) {
+      if (keys[i].innerText !== keyboardRowsEn[i]) {
+        keys[i].innerText = keyboardRowsEn[i];
+      }
+    }
+    console.log(keys[i]);
+  }
+}
+
