@@ -149,7 +149,7 @@ arrowWrap.appendChild(keys[63]);
 
 // const del = document.querySelector('.delete-key');
 const backspace = document.querySelector('.backspace');
-// const capsLock = document.querySelector('.caps-lock');
+const capsLock = document.querySelector('.caps-lock');
 // const tab = document.querySelector('.tab');
 // const enter = document.querySelector('.enter');
 const shiftLeft = document.querySelector('.shift-left');
@@ -301,3 +301,50 @@ shiftLeft.addEventListener('mousedown', ShiftKeyDown);
 shiftLeft.addEventListener('mouseup', ShiftKeyUp);
 shiftRight.addEventListener('mousedown', ShiftKeyDown);
 shiftRight.addEventListener('mouseup', ShiftKeyUp);
+
+
+// Caps Lock
+
+let capsLockPressed = false;
+
+function CapsLockKeyDown(event) {
+  if (event.code === 'CapsLock' || event.target === capsLock) {
+    capsLockPressed = true;
+    if (currentLang === 'en') {
+      for (let i = 13; i < keys.length; i += 1) {
+        if (keys[i].innerText !== keyboardRowsEnUp[i]) {
+          keys[i].innerText = keyboardRowsEnUp[i];
+        }
+      }
+    } else if (currentLang === 'ru') {
+      for (let i = 13; i < keys.length; i += 1) {
+        if (keys[i].innerText !== keyboardRowsRuUp[i]) {
+          keys[i].innerText = keyboardRowsRuUp[i];
+        }
+      }
+    }
+  }
+}
+
+function CapsLockKeyUp(event) {
+  if (event.code === 'CapsLock' || event.target === capsLock) {
+    capsLockPressed = false;
+    if (currentLang === 'en') {
+      for (let i = 0; i < keys.length; i += 1) {
+        if (keys[i].innerText !== keyboardRowsEn[i]) {
+          keys[i].innerText = keyboardRowsEn[i];
+        }
+      }
+    } else if (currentLang === 'ru') {
+      for (let i = 0; i < keys.length; i += 1) {
+        if (keys[i].innerText !== keyboardRowsRu[i]) {
+          keys[i].innerText = keyboardRowsRu[i];
+        }
+      }
+    }
+  }
+}
+
+document.addEventListener('keydown', CapsLockKeyDown);
+document.addEventListener('keyup', CapsLockKeyUp);
+document.addEventListener('click', CapsLockKeyDown);
