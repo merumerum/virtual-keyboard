@@ -30,11 +30,11 @@ keyboardKeys.className = 'keyboard_keys';
 h1.innerText = 'RSS Virtual Keyboard by Meru';
 
 const keyboardRows = [
-  ['Del', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
+  ['Del', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', ''],
   ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', 'Enter'],
   ['Caps lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'", '\\'],
   ['Shift', '`', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'Shift'],
-  ['fn', 'control', 'option', 'command', '', 'command', 'option', 'Left', 'Up', 'Down', 'Right'],
+  ['control', 'option', 'command', '', 'command', 'option', '', '', '', ''],
 ];
 
 for (let i = 0; i < keyboardRows.length; i += 1) {
@@ -56,13 +56,13 @@ for (let i = 0; i < keys.length; i += 1) {
   if (keys[i].textContent === 'Del') {
     keys[i].classList.add('delete-key');
   }
-  if (keys[i].textContent === 'Backspace') {
+  if (keys[i].textContent === '' && i === 13) {
     keys[i].classList.add('backspace');
   }
   if (keys[i].textContent === 'Tab') {
     keys[i].classList.add('tab');
   }
-  if (keys[i].textContent === 'Enter') {
+  if (keys[i].textContent === 'Enter' && i === 27) {
     keys[i].classList.add('enter');
   }
   if (keys[i].textContent === 'Caps lock') {
@@ -77,37 +77,34 @@ for (let i = 0; i < keys.length; i += 1) {
   if (keys[i].textContent === 'Shift' && i === 53) {
     keys[i].classList.add('shift', 'shift-right');
   }
-  if (keys[i].textContent === 'fn') {
-    keys[i].classList.add('fn');
-  }
   if (keys[i].textContent === 'contral') {
     keys[i].classList.add('ctrl');
   }
   if (keys[i].textContent === 'option' && i === 56) {
     keys[i].classList.add('option', 'option-left');
   }
-  if (keys[i].textContent === 'option' && i === 60) {
+  if (keys[i].textContent === 'option' && i === 59) {
     keys[i].classList.add('option', 'option-right');
   }
-  if (keys[i].textContent === 'command' && i === 57) {
+  if (keys[i].textContent === 'command' && i === 56) {
     keys[i].classList.add('cmd', 'cmd-left');
   }
-  if (keys[i].textContent === 'command' && i === 59) {
+  if (keys[i].textContent === 'command' && i === 58) {
     keys[i].classList.add('cmd', 'cmd-right');
   }
-  if (keys[i].textContent === '') {
+  if (keys[i].textContent === '' && i === 57) {
     keys[i].classList.add('space-key');
   }
-  if (keys[i].textContent === 'Left') {
+  if (keys[i].textContent === '' && i === 60) {
     keys[i].classList.add('arrow-keys');
   }
-  if (keys[i].textContent === 'Up') {
+  if (keys[i].textContent === '' && i === 61) {
     keys[i].classList.add('arrow-keys', 'up');
   }
-  if (keys[i].textContent === 'Down') {
+  if (keys[i].textContent === '' && i === 62) {
     keys[i].classList.add('arrow-keys', 'down');
   }
-  if (keys[i].textContent === 'Right') {
+  if (keys[i].textContent === '' && i === 63) {
     keys[i].classList.add('arrow-keys');
   }
 }
@@ -116,21 +113,26 @@ const rowWithArrow = document.querySelectorAll('.row')[4];
 const arrowWrap = document.createElement('div');
 rowWithArrow.appendChild(arrowWrap);
 arrowWrap.className = 'arrow-keys-wrap';
+arrowWrap.appendChild(keys[60]);
 arrowWrap.appendChild(keys[61]);
 arrowWrap.appendChild(keys[62]);
 arrowWrap.appendChild(keys[63]);
-arrowWrap.appendChild(keys[64]);
 
 // const del = document.querySelector('.delete-key');
-// const backspace = document.querySelector('.backspace');
+const backspace = document.querySelector('.backspace');
 // const capsLock = document.querySelector('.caps-lock');
 // const tab = document.querySelector('.tab');
 // const enter = document.querySelector('.enter');
 // const shiftLeft = document.querySelector('.shift-left');
 // const shiftRight = document.querySelector('.shift-right');
 // const spaceKey = document.querySelector('.space-key');
-// const fn = document.querySelector('.fn');
 // const inputText = document.querySelector('.input');
+
+backspace.innerHTML = '<i class="fa-solid fa-delete-left"></i>';
+keys[60].innerHTML = '<i class="fa-solid fa-caret-left"></i>';
+keys[61].innerHTML = '<i class="fa-solid fa-caret-up"></i>';
+keys[62].innerHTML = '<i class="fa-solid fa-caret-down"></i>';
+keys[63].innerHTML = '<i class="fa-solid fa-caret-right"></i>';
 
 // let jet = [];
 // document.onkeydown = function (e) {
@@ -139,7 +141,13 @@ arrowWrap.appendChild(keys[64]);
 //   console.log(jet);
 // }
 
-const keyboard = [46, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 189, 187, 8, 9, 81, 87, 69, 82, 84, 89, 85, 73, 79, 80, 219, 221, 13, 20, 65, 83, 68, 70, 71, 72, 74, 75, 76, 186, 222, 220, 16, 192, 90, 88, 67, 86, 66, 78, 77, 188, 190, 191, 16, 112, 17, 18, 91, 32, 93, 18, 37, 38, 40, 39];
+const keyboard = [
+  'Delete', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace',
+  'Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Enter',
+  'CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Backslash',
+  'ShiftLeft', 'IntlBackslash', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ShiftRight',
+  'ControlLeft', 'AltLeft', 'MetaLeft', 'Space', 'MetaRight', 'AltRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight',
+];
 
 for (let i = 0; i < keys.length; i += 1) {
   keys[i].setAttribute('id', keyboard[i]);
@@ -147,9 +155,9 @@ for (let i = 0; i < keys.length; i += 1) {
 
 function keyDown(event) {
   const key = event.target;
-  const { keyCode } = event;
+  const { code } = event;
   for (let i = 0; i < keys.length; i += 1) {
-    if (+keys[i].getAttribute('id') === keyCode || keys[i] === key) {
+    if (keys[i].getAttribute('id') === code || keys[i] === key) {
       keys[i].classList.remove('remove');
       keys[i].classList.add('active');
     }
@@ -158,9 +166,9 @@ function keyDown(event) {
 
 function keyUp(event) {
   const key = event.target;
-  const { keyCode } = event;
+  const { code } = event;
   for (let i = 0; i < keys.length; i += 1) {
-    if (+keys[i].getAttribute('id') === keyCode || keys[i] === key) {
+    if (keys[i].getAttribute('id') === code || keys[i] === key) {
       keys[i].classList.remove('active');
       keys[i].classList.add('remove');
     }

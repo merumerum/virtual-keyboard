@@ -79,6 +79,8 @@
   right: 0%;
   background-color: #fff;
   border-radius: 0 0 5px 5px;
+  transition: .2s;
+  cursor: pointer;
 }
 
 .shift-left {
@@ -98,7 +100,7 @@
 }
 
 .space-key {
-  width: 332px;
+  width: 399px;
 }
 
 .arrow-keys-wrap {
@@ -121,13 +123,20 @@
   right: 33.4%;
 }
 
-.keys.active {
+.keys.active,
+.keys.active::before {
   background-color: #333;
   color: #fff;
 }
 
-.keys.remove {
+.keys.remove,
+.keys.remove::before {
   animation: keys-animation 0.5s;
+}
+
+.backspace i {
+  position: absolute;
+  right: 19px;
 }
 
 @keyframes keys-animation {
@@ -139,4 +148,9 @@
     background-color: #fff;
     color: #333;
   }
+}
+
+.globe .globe-icon {
+  width: 22px;
+  height: 22px;
 }
