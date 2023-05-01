@@ -5,7 +5,7 @@ const footer = document.createElement('footer');
 const h1 = document.createElement('h1');
 const mainSection = document.createElement('section');
 const mainContainer = document.createElement('div');
-const input = document.createElement('input');
+const input = document.createElement('textarea');
 const keyboardWrap = document.createElement('div');
 const keyboardKeys = document.createElement('div');
 
@@ -25,13 +25,13 @@ input.className = 'input';
 keyboardWrap.className = 'wrap';
 mainContainer.className = 'container';
 h1.className = 'title';
-keyboardKeys.className = 'keyboard_keys';
+keyboardKeys.className = 'keyboard-keys';
 
 h1.innerText = 'RSS Virtual Keyboard by Meru';
 
 const keyboardRows = [
   ['Del', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', ''],
-  ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', '0', 'p', '[', ']', 'Enter'],
+  ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', 'Enter'],
   ['Caps lock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", '\\'],
   ['Shift', '`', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'Shift'],
   ['control', 'option', 'command', '', 'command', 'option', '', '', '', ''],
@@ -39,11 +39,27 @@ const keyboardRows = [
 
 const keyboardRowsEn = keyboardRows.flat();
 
+const keyboardRowsEnUp = [
+  'Del', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '',
+  'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', 'Enter',
+  'Caps lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', '?',
+  'Shift', '~', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 'Shift',
+  'control', 'option', 'command', '', 'command', 'option', '', '', '', '',
+];
+
 const keyboardRowsRu = [
-  'Del', '!', '"', '№', '%', ':', ',', '.', ';', '(', ')', '_', '+', '',
+  'Del', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '',
   'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'Enter',
-  'Caps lock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', "э", '\\',
+  'Caps lock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', '\\',
   'Shift', 'ё', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'Shift',
+  'control', 'option', 'command', '', 'command', 'option', '', '', '', '',
+];
+
+const keyboardRowsRuUp = [
+  'Del', '!', '"', '№', '%', ':', ',', '.', ';', '(', ')', '_', '+', '',
+  'Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', 'Enter',
+  'Caps lock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', '/',
+  'Shift', 'Ё', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', '?', 'Shift',
   'control', 'option', 'command', '', 'command', 'option', '', '', '', '',
 ];
 
@@ -62,7 +78,6 @@ function generateKeyboard(lang) {
   }
 }
 generateKeyboard(keyboardRows);
-
 
 const keys = document.querySelectorAll('.keys');
 
@@ -137,8 +152,8 @@ const backspace = document.querySelector('.backspace');
 // const capsLock = document.querySelector('.caps-lock');
 // const tab = document.querySelector('.tab');
 // const enter = document.querySelector('.enter');
-// const shiftLeft = document.querySelector('.shift-left');
-// const shiftRight = document.querySelector('.shift-right');
+const shiftLeft = document.querySelector('.shift-left');
+const shiftRight = document.querySelector('.shift-right');
 // const spaceKey = document.querySelector('.space-key');
 // const inputText = document.querySelector('.input');
 
@@ -147,8 +162,6 @@ keys[60].innerHTML = '<i class="fa-solid fa-caret-left"></i>';
 keys[61].innerHTML = '<i class="fa-solid fa-caret-up"></i>';
 keys[62].innerHTML = '<i class="fa-solid fa-caret-down"></i>';
 keys[63].innerHTML = '<i class="fa-solid fa-caret-right"></i>';
-
-
 
 // let jet = [];
 // document.onkeydown = function (e) {
@@ -196,34 +209,10 @@ document.addEventListener('keyup', keyUp);
 document.addEventListener('mousedown', keyDown);
 document.addEventListener('mouseup', keyUp);
 
-
 // переключение языка
 let ctrlPressed = false;
 let altPressed = false;
 let currentLang = 'en';
-
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Control') {
-    ctrlPressed = true;
-  }
-  if (event.key === 'Alt') {
-    altPressed = true;
-  }
-
-  if (ctrlPressed && altPressed) {
-    switchLanguage();
-  }
-  console.log(currentLang);
-});
-
-document.addEventListener('keyup', (event) => {
-  if (event.key === 'Control') {
-    ctrlPressed = false;
-  }
-  if (event.key === 'Alt') {
-    altPressed = false;
-  }
-});
 
 function switchLanguage() {
   if (currentLang === 'en') {
@@ -240,7 +229,75 @@ function switchLanguage() {
         keys[i].innerText = keyboardRowsEn[i];
       }
     }
-    console.log(keys[i]);
   }
 }
 
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Control') {
+    ctrlPressed = true;
+  }
+  if (event.key === 'Alt') {
+    altPressed = true;
+  }
+  if (ctrlPressed && altPressed) {
+    switchLanguage();
+  }
+});
+
+document.addEventListener('keyup', (event) => {
+  if (event.key === 'Control') {
+    ctrlPressed = false;
+  }
+  if (event.key === 'Alt') {
+    altPressed = false;
+  }
+});
+
+// удерживание кнопок
+const shiftKeys = ['ShiftLeft', 'ShiftRight'];
+let shiftPressed = false;
+
+function ShiftKeyDown(event) {
+  if (shiftKeys.includes(event.code) || event.target === shiftLeft || event.target === shiftRight) {
+    shiftPressed = true;
+    if (currentLang === 'en') {
+      for (let i = 0; i < keys.length; i += 1) {
+        if (keys[i].innerText !== keyboardRowsEnUp[i]) {
+          keys[i].innerText = keyboardRowsEnUp[i];
+        }
+      }
+    } else if (currentLang === 'ru') {
+      for (let i = 0; i < keys.length; i += 1) {
+        if (keys[i].innerText !== keyboardRowsRuUp[i]) {
+          keys[i].innerText = keyboardRowsRuUp[i];
+        }
+      }
+    }
+  }
+}
+
+function ShiftKeyUp(event) {
+  if (shiftKeys.includes(event.code) || event.target === shiftLeft || event.target === shiftRight) {
+    shiftPressed = false;
+    if (currentLang === 'en') {
+      for (let i = 0; i < keys.length; i += 1) {
+        if (keys[i].innerText !== keyboardRowsEn[i]) {
+          keys[i].innerText = keyboardRowsEn[i];
+        }
+      }
+    } else if (currentLang === 'ru') {
+      for (let i = 0; i < keys.length; i += 1) {
+        if (keys[i].innerText !== keyboardRowsRu[i]) {
+          keys[i].innerText = keyboardRowsRu[i];
+        }
+      }
+    }
+  }
+}
+
+document.addEventListener('keydown', ShiftKeyDown);
+document.addEventListener('keyup', ShiftKeyUp);
+shiftLeft.addEventListener('mousedown', ShiftKeyDown);
+shiftLeft.addEventListener('mouseup', ShiftKeyUp);
+shiftRight.addEventListener('mousedown', ShiftKeyDown);
+shiftRight.addEventListener('mouseup', ShiftKeyUp);

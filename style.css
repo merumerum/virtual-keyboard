@@ -17,10 +17,14 @@
 }
 
 .input {
-  width: 992px;
+  width: 966px;
   height: 100px;
   margin-bottom: 20px;
+  padding: 15px;
   font-size: 20px;
+  border: 1px solid #ccc;
+  resize: none;
+  outline: none;
 }
 
 .wrap {
