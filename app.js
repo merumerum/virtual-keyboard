@@ -10,6 +10,8 @@ const keyboardWrap = document.createElement('div');
 const keyboardKeys = document.createElement('div');
 const subtitle = document.createElement('div');
 
+
+
 body.className = 'body';
 body.appendChild(header);
 body.appendChild(main);
@@ -68,6 +70,7 @@ const keyboardRowsRuUp = [
 ];
 
 keyboardKeys.addEventListener('click', (event) => {
+  input.focus();
   const cursorPosition = input.selectionStart;
   const key = event.target;
   const keyCode = key.getAttribute('id');
@@ -82,15 +85,13 @@ keyboardKeys.addEventListener('click', (event) => {
   } else if (keyCode === 'Tab') {
     event.preventDefault();
     input.value += '\t';
-    input.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
   } else if (keyCode === 'Enter') {
     input.value += '\n';
-    input.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
   } else if (keyCode === 'Space') {
     input.value += ' ';
-    input.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
   }
 });
+
 
 function generateKeyboard(lang) {
   for (let i = 0; i < lang.length; i += 1) {
@@ -212,6 +213,7 @@ for (let i = 0; i < keys.length; i += 1) {
 }
 
 function keyDown(event) {
+  input.focus();
   const key = event.target;
   const { code } = event;
   for (let i = 0; i < keys.length; i += 1) {
