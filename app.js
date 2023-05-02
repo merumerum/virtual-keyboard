@@ -10,8 +10,6 @@ const keyboardWrap = document.createElement('div');
 const keyboardKeys = document.createElement('div');
 const subtitle = document.createElement('div');
 
-
-
 body.className = 'body';
 body.appendChild(header);
 body.appendChild(main);
@@ -91,7 +89,6 @@ keyboardKeys.addEventListener('click', (event) => {
     input.value += ' ';
   }
 });
-
 
 function generateKeyboard(lang) {
   for (let i = 0; i < lang.length; i += 1) {
@@ -177,15 +174,10 @@ arrowWrap.appendChild(keys[61]);
 arrowWrap.appendChild(keys[62]);
 arrowWrap.appendChild(keys[63]);
 
-// const del = document.querySelector('.delete-key');
 const backspace = document.querySelector('.backspace');
 const capsLock = document.querySelector('.caps-lock');
-// const tab = document.querySelector('.tab');
-// const enter = document.querySelector('.enter');
 const shiftLeft = document.querySelector('.shift-left');
 const shiftRight = document.querySelector('.shift-right');
-// const spaceKey = document.querySelector('.space-key');
-// const inputText = document.querySelector('.input');
 
 backspace.innerHTML = '<i class="fa-solid fa-delete-left"></i>';
 keys[60].innerHTML = '<i class="fa-solid fa-caret-left"></i>';
@@ -338,17 +330,23 @@ let capsLockPressed = false;
 
 function CapsLockKeyDown(event) {
   if (event.code === 'CapsLock' || event.target === capsLock) {
-    capsLockPressed = true;
-    if (currentLang === 'en') {
-      for (let i = 13; i < keys.length; i += 1) {
-        if (keys[i].innerText !== keyboardRowsEnUp[i]) {
-          keys[i].innerText = keyboardRowsEnUp[i];
+    capsLockPressed = !capsLockPressed;
+    const keyboardRowss = currentLang === 'en' ? keyboardRowsEn : keyboardRowsRu;
+    const keyboardRowsUp = currentLang === 'en' ? keyboardRowsEnUp : keyboardRowsRuUp;
+    const capsLockClassList = capsLock.classList;
+    for (let i = 13; i < keys.length; i += 1) {
+      const key = keys[i];
+      if (capsLockPressed) {
+        if (key.innerText !== keyboardRowsUp[i] && /^[a-zA-Zа-яА-ЯёЁ]+$/.test(key.innerText)) {
+          key.innerText = keyboardRowsUp[i];
+          capsLockClassList.add('active');
+          capsLockClassList.remove('remove');
         }
-      }
-    } else if (currentLang === 'ru') {
-      for (let i = 13; i < keys.length; i += 1) {
-        if (keys[i].innerText !== keyboardRowsRuUp[i]) {
-          keys[i].innerText = keyboardRowsRuUp[i];
+      } else {
+        if (key.innerText !== keyboardRowss[i]) {
+          key.innerText = keyboardRowss[i];
+          capsLockClassList.remove('active');
+          capsLockClassList.add('remove');
         }
       }
     }
