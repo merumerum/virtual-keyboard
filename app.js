@@ -87,6 +87,18 @@ keyboardKeys.addEventListener('click', (event) => {
     input.value += '\n';
   } else if (keyCode === 'Space') {
     input.value += ' ';
+  } else if (keyCode === 'ArrowLeft') {
+    if (cursorPosition > 0) {
+      input.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
+    }
+  } else if (keyCode === 'ArrowUp') {
+    input.setSelectionRange(0, 0);
+  } else if (keyCode === 'ArrowDown') {
+    input.setSelectionRange(input.value.length, input.value.length);
+  } else if (keyCode === 'ArrowRight') {
+    if (cursorPosition < input.value.length) {
+      input.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+    }
   }
 });
 
@@ -203,6 +215,13 @@ const keyboard = [
 for (let i = 0; i < keys.length; i += 1) {
   keys[i].setAttribute('id', keyboard[i]);
 }
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Tab') {
+    event.preventDefault();
+    input.value += '\t';
+  }
+});
 
 function keyDown(event) {
   input.focus();
