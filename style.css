@@ -1,0 +1,170 @@
+.body {
+  font-family: 'Lato', sans-serif;
+  transition: .2s;
+  background: url(1.jpeg) center center/cover no-repeat;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  flex-direction: column;
+  margin: 0 10px;
+}
+
+.title {
+  text-align: center;
+  color: #003566;
+}
+
+.subtitle {
+  text-align: center;
+  color: #003566;
+  font-size: 16px;
+  font-weight: 100;
+}
+
+.input {
+  width: 966px;
+  height: 100px;
+  margin-bottom: 20px;
+  padding: 15px;
+  font-size: 20px;
+  border: 1px solid #ccc;
+  resize: none;
+  outline: none;
+  color: #003566;
+}
+
+.wrap {
+  position: relative;
+  width: 1000px;
+  background:url(flowers.jpeg) center center/cover no-repeat;
+  overflow: hidden;
+  order: 2;
+}
+
+.row {
+  display: flex;
+}
+
+.keys {
+  width: 60px;
+  height: 60px;
+  background-color: #f6fff8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4px;
+  transition: .2s;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.backspace {
+  width: 120px;
+}
+
+.tab {
+  width: 90px;
+}
+
+.slash-key {
+  width: 60px;
+}
+
+.caps-lock {
+  width: 116px;
+}
+
+.enter {
+  position: relative;
+  width: 90px;
+  border-radius: 5px 5px 0 5px
+}
+
+.enter:before {
+  position: absolute;
+  content: '';
+  width: 52px;
+  height: 68px;
+  top: 100%;
+  right: 0%;
+  background-color: #f6fff8;
+  border-radius: 0 0 5px 5px;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.shift-left {
+  width: 80px;
+}
+
+.shift-right {
+  width: 156px;
+}
+
+.cmd-left {
+  width: 80px;
+}
+
+.cmd-right {
+  width: 80px;
+}
+
+.space-key {
+  width: 399px;
+}
+
+.arrow-keys-wrap {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+}
+
+.arrow-keys {
+  width: 63px;
+  height: 28px;
+  background-color: #f6fff8;
+  border-radius: 4px;
+}
+
+.up {
+  position: absolute;
+  top: 0%;
+  right: 33.4%;
+}
+
+.keys.active,
+.keys.active::before {
+  background-color: #3a5a40;
+  color: #f6fff8;
+}
+
+.keys.remove,
+.keys.remove::before {
+  animation: keys-animation 0.5s;
+}
+
+.backspace i {
+  position: absolute;
+  right: 19px;
+}
+
+@keyframes keys-animation {
+  0% {
+    background-color: #3a5a40;
+    color: #f6fff8;
+  }
+  100% {
+    background-color: #f6fff8;
+    color: #333;
+  }
+}
+
+.globe .globe-icon {
+  width: 22px;
+  height: 22px;
+}
